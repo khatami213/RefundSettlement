@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7AC6AA87-1D7E-4FBC-8900-F7F9BBA2C12A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RefundSettelment</RootNamespace>
+    <AssemblyName>RefundSettelment</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>DigiKala.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.5.7.0\lib\net451\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.5.7.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.5.7.0\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.15.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.15.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.5.7.0\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Enums\ExtentionMethodes.cs" />
+    <Compile Include="Enums\JibitServiceStatusEnum.cs" />
+    <Compile Include="ExternalServices\CallExternalServices.cs" />
+    <Compile Include="ExternalServices\JibitServices\JibitService.cs" />
+    <Compile Include="ExternalServices\JibitServices\Models\BaseTokenResponseModel.cs" />
+    <Compile Include="ExternalServices\JibitServices\Models\GetBalanceResponseModel.cs" />
+    <Compile Include="ExternalServices\JibitServices\Models\TokenResponseModel.cs" />
+    <Compile Include="ExternalServices\JibitServices\Models\TransferRequestModel.cs" />
+    <Compile Include="ExternalServices\JibitServices\Models\TransferResponseModel.cs" />
+    <Compile Include="ExternalServices\JibitServices\TokenManager.cs" />
+    <Compile Include="Helper_Code\Helpers.cs" />
+    <Compile Include="Helper_Code\Logging.cs" />
+    <Compile Include="Helper_Code\Types\LogType.cs" />
+    <Compile Include="Model\CardsInfo.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CardToCard.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CardTransfer.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DailyTransactionAmount.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\IBANTransfer.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Log.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NationalCodeInquiry.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ProviderTransferDetailes.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RefundModel\CardsInfoModel.cs" />
+    <Compile Include="Model\RefundModel\CardTransferModel.cs" />
+    <Compile Include="Model\RefundModel\IBANTransferModel.cs" />
+    <Compile Include="Model\RefundProvider.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RefundRequest.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RefundRequestReconciliation.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RefundSettelmentEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RefundSettelmentEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RefundSettelmentEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\RefundSettelmentEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RefundSettelmentEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ServerInfo.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_RefundStatistics_Result.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Token.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WebServicePermission.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WebServiceUser.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WebServiceUsersPermission.cs">
+      <DependentUpon>RefundSettelmentEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="RefundSettelment.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RefundSettelment.Designer.cs">
+      <DependentUpon>RefundSettelment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\CryptorEngine.cs" />
+    <Compile Include="Web References\YaghutWebRefrence\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Log4Net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <EntityDeploy Include="Model\RefundSettelmentEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RefundSettelmentEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\RefundSettelmentEntities.edmx.diagram">
+      <DependentUpon>RefundSettelmentEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\YaghutWebRefrence\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\YaghutWebRefrence\Yaghut.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logging\Logging.csproj">
+      <Project>{aa2ccf2f-8ad4-48f4-bf13-1f55e203143e}</Project>
+      <Name>Logging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="RefundSettelment.resx">
+      <DependentUpon>RefundSettelment.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\YaghutWebRefrence\Yaghut.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:8081/Yaghut.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\YaghutWebRefrence\</RelPath>
+      <UpdateFromURL>http://localhost:8081/Yaghut.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>RefundSettelment_YaghutWebRefrence_Yaghut_MobileApp</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DigiKala.ico" />
+    <Content Include="Model\RefundSettelmentEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RefundSettelmentEntities.edmx</DependentUpon>
+      <LastGenOutput>RefundSettelmentEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\RefundSettelmentEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>RefundSettelmentEntities.edmx</DependentUpon>
+      <LastGenOutput>RefundSettelmentEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

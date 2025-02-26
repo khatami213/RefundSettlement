@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="07b842770eef4ff58bbab990e7421247" Name="Diagram1" ZoomLevel="93">
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.CardToCard" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.CardTransfer" Width="1.5" PointX="5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.DailyTransactionAmount" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.Log" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.NationalCodeInquiry" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.RefundRequest" Width="1.5" PointX="2.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.RefundRequestReconciliation" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.ServerInfo" Width="1.5" PointX="0.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.Token" Width="1.5" PointX="2.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.WebServicePermission" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.WebServiceUser" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.WebServiceUsersPermission" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="PNA_RefundServiceModel.FK_CardTransfer_RefundRequest" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.RefundProvider" Width="1.5" PointX="0.75" PointY="13.125" />
+        <AssociationConnector Association="PNA_RefundServiceModel.FK__WebServic__Provi__04E4BC85" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.CardsInfo" Width="1.5" PointX="3" PointY="1.875" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.IBANTransfer" Width="1.5" PointX="10.375" PointY="7.75" />
+        <EntityTypeShape EntityType="PNA_RefundServiceModel.ProviderTransferDetailes" Width="1.5" PointX="10.375" PointY="11.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

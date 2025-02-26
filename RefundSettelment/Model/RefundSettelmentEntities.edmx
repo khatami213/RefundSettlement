@@ -1,0 +1,818 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PNA_RefundServiceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CardsInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EncryptedData" Type="nvarchar(max)" />
+          <Property Name="Balance" Type="bigint" />
+          <Property Name="IsUsing" Type="bit" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
+        <EntityType Name="CardToCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SourcePan" Type="nvarchar(max)" />
+          <Property Name="DestinationPan" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="bigint" />
+          <Property Name="Rrn" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResponseCode" Type="nchar" MaxLength="10" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="InsertDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="CardTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefundRefrenceNumber" Type="bigint" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rrn" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="bigint" />
+          <Property Name="EncryptedSourcePan" Type="nvarchar(max)" />
+          <Property Name="InsertDateTime" Type="datetime" />
+          <Property Name="TransactionDateTime" Type="datetime" />
+          <Property Name="RetryCount" Type="int" />
+          <Property Name="SourceCardId" Type="int" />
+        </EntityType>
+        <EntityType Name="DailyTransactionAmount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InsertDate" Type="date" Nullable="false" />
+          <Property Name="TodayAmountSum" Type="bigint" />
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IBANTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefundRefrenceNumber" Type="bigint" />
+          <Property Name="Status" Type="nvarchar" MaxLength="10" />
+          <Property Name="TransferId" Type="bigint" />
+          <Property Name="Amount" Type="bigint" />
+          <Property Name="EncryptedIBAN" Type="nvarchar(max)" />
+          <Property Name="EncryptedPan" Type="nvarchar(max)" />
+          <Property Name="InsertDateTime" Type="datetime" />
+          <Property Name="TransactionDateTime" Type="datetime" />
+          <Property Name="RetryCount" Type="int" />
+          <Property Name="InquiryCommision" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FunctionName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="RefrenceNumber" Type="bigint" />
+          <Property Name="Rrn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Amount" Type="bigint" />
+          <Property Name="MaskedDestinationPan" Type="nvarchar" MaxLength="50" />
+          <Property Name="RefundDescription" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="InsertDateTime" Type="datetime" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="NationalCodeInquiry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResponseCode" Type="bigint" />
+          <Property Name="NationalCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="FatherName" Type="nvarchar(max)" />
+          <Property Name="BirthDate" Type="nvarchar(max)" />
+          <Property Name="ShenasnameSerial" Type="nvarchar(max)" />
+          <Property Name="ShenasnameNo" Type="nvarchar(max)" />
+          <Property Name="ShenasnameSeri" Type="nvarchar(max)" />
+          <Property Name="DeathStatus" Type="int" />
+          <Property Name="GenderStatus" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ProviderTransferDetailes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransferId" Type="bigint" />
+          <Property Name="ResponseStatus" Type="bit" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" />
+          <Property Name="ErrorMessage" Type="nvarchar" MaxLength="500" />
+          <Property Name="TransferAmount" Type="bigint" />
+          <Property Name="TransferCount" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RefrenceNumber" Type="bigint" Nullable="false" />
+          <Property Name="CardStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="CardOwner" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="RefundProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RefundRequest">
+          <Key>
+            <PropertyRef Name="RefrenceNumber" />
+          </Key>
+          <Property Name="RefrenceNumber" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestId" Type="bigint" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="EncryptedPan" Type="nvarchar(max)" />
+          <Property Name="TransactionAmount" Type="bigint" />
+          <Property Name="CommitionAmount" Type="bigint" />
+          <Property Name="RefundStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="TransferRrn" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="RefundDescription" Type="nvarchar(max)" />
+          <Property Name="InsertDateTime" Type="datetime" />
+          <Property Name="TransferDateTime" Type="datetime" />
+          <Property Name="CardTransferInserted" Type="bit" />
+          <Property Name="RetryCount" Type="int" />
+          <Property Name="SubRefundStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="RRN" Type="varchar" MaxLength="50" />
+          <Property Name="IsProvider" Type="bit" />
+          <Property Name="IBANTransferInserted" Type="bit" />
+        </EntityType>
+        <EntityType Name="RefundRequestReconciliation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RefrenceNumber" Type="bigint" Nullable="false" />
+          <Property Name="EncryptedPan" Type="nvarchar(max)" />
+          <Property Name="CardTransferEncryptedSourcePan" Type="nvarchar(max)" />
+          <Property Name="ReverseAmount" Type="bigint" />
+          <Property Name="InsertDateTime" Type="datetime" Nullable="false" />
+          <Property Name="ReverseRrn" Type="nvarchar" MaxLength="150" />
+          <Property Name="ReverseDateTime" Type="datetime" />
+          <Property Name="ReverseStatus" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ServerInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServerName" Type="nvarchar(max)" />
+          <Property Name="PublicKey" Type="nvarchar(max)" />
+          <Property Name="PrivateKey" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Token">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TokenIssueDate" Type="datetime" />
+          <Property Name="Token" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TokenVerifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="WebServicePermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Permission" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="WebServiceUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="PublicKey" Type="nvarchar(max)" />
+          <Property Name="YaghutUser" Type="nvarchar(max)" />
+          <Property Name="YaghutPassword" Type="nvarchar(max)" />
+          <Property Name="CustomerAccount" Type="nvarchar(max)" />
+          <Property Name="BankAccount" Type="nvarchar(max)" />
+          <Property Name="ReverseCardNumber" Type="nvarchar(max)" />
+          <Property Name="TransactionMaximumAmount" Type="bigint" />
+          <Property Name="ProviderId" Type="int" />
+        </EntityType>
+        <EntityType Name="WebServiceUsersPermission">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Name="UserId" Type="bigint" Nullable="false" />
+          <Property Name="PermissionId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__WebServic__Provi__04E4BC85">
+          <End Role="RefundProvider" Type="Self.RefundProvider" Multiplicity="0..1" />
+          <End Role="WebServiceUser" Type="Self.WebServiceUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RefundProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WebServiceUser">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CardTransfer_RefundRequest">
+          <End Role="RefundRequest" Type="Self.RefundRequest" Multiplicity="0..1" />
+          <End Role="CardTransfer" Type="Self.CardTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RefundRequest">
+              <PropertyRef Name="RefrenceNumber" />
+            </Principal>
+            <Dependent Role="CardTransfer">
+              <PropertyRef Name="RefundRefrenceNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_RefundStatistics" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="PNA_RefundServiceModelStoreContainer">
+          <EntitySet Name="CardsInfo" EntityType="Self.CardsInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardToCard" EntityType="Self.CardToCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CardTransfer" EntityType="Self.CardTransfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DailyTransactionAmount" EntityType="Self.DailyTransactionAmount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IBANTransfer" EntityType="Self.IBANTransfer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NationalCodeInquiry" EntityType="Self.NationalCodeInquiry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProviderTransferDetailes" EntityType="Self.ProviderTransferDetailes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RefundProvider" EntityType="Self.RefundProvider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RefundRequest" EntityType="Self.RefundRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RefundRequestReconciliation" EntityType="Self.RefundRequestReconciliation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServerInfo" EntityType="Self.ServerInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Token" EntityType="Self.Token" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebServicePermission" EntityType="Self.WebServicePermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebServiceUser" EntityType="Self.WebServiceUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebServiceUsersPermission" EntityType="Self.WebServiceUsersPermission" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__WebServic__Provi__04E4BC85" Association="Self.FK__WebServic__Provi__04E4BC85">
+            <End Role="RefundProvider" EntitySet="RefundProvider" />
+            <End Role="WebServiceUser" EntitySet="WebServiceUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CardTransfer_RefundRequest" Association="Self.FK_CardTransfer_RefundRequest">
+            <End Role="RefundRequest" EntitySet="RefundRequest" />
+            <End Role="CardTransfer" EntitySet="CardTransfer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PNA_RefundServiceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CardToCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SourcePan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DestinationPan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int64" />
+          <Property Name="Rrn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseCode" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsertDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="CardTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefundRefrenceNumber" Type="Int64" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rrn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int64" />
+          <Property Name="EncryptedSourcePan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TransactionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="RetryCount" Type="Int32" />
+          <NavigationProperty Name="RefundRequest" Relationship="Self.FK_CardTransfer_RefundRequest" FromRole="CardTransfer" ToRole="RefundRequest" />
+          <Property Name="SourceCardId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DailyTransactionAmount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InsertDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TodayAmountSum" Type="Int64" />
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FunctionName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RefrenceNumber" Type="Int64" />
+          <Property Name="Rrn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Int64" />
+          <Property Name="MaskedDestinationPan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RefundDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="InsertDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NationalCodeInquiry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResponseCode" Type="Int64" />
+          <Property Name="NationalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BirthDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShenasnameSerial" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShenasnameNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShenasnameSeri" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DeathStatus" Type="Int32" />
+          <Property Name="GenderStatus" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RefundRequest">
+          <Key>
+            <PropertyRef Name="RefrenceNumber" />
+          </Key>
+          <Property Name="RefrenceNumber" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestId" Type="Int64" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EncryptedPan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionAmount" Type="Int64" />
+          <Property Name="CommitionAmount" Type="Int64" />
+          <Property Name="RefundStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TransferRrn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RefundDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TransferDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CardTransferInserted" Type="Boolean" />
+          <NavigationProperty Name="CardTransfer" Relationship="Self.FK_CardTransfer_RefundRequest" FromRole="RefundRequest" ToRole="CardTransfer" />
+          <Property Name="RetryCount" Type="Int32" />
+          <Property Name="RRN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubRefundStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsProvider" Type="Boolean" />
+          <Property Name="IBANTransferInserted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="RefundRequestReconciliation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefrenceNumber" Type="Int64" Nullable="false" />
+          <Property Name="EncryptedPan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CardTransferEncryptedSourcePan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReverseAmount" Type="Int64" />
+          <Property Name="InsertDateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ReverseRrn" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ReverseDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ReverseStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ServerInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublicKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PrivateKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Token">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TokenIssueDate" Type="DateTime" Precision="3" />
+          <Property Name="Token1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TokenVerifiedDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="WebServicePermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Permission" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WebServiceUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="PublicKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YaghutUser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YaghutPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerAccount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankAccount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReverseCardNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionMaximumAmount" Type="Int64" />
+          <Property Name="ProviderId" Type="Int32" />
+          <NavigationProperty Name="RefundProvider" Relationship="PNA_RefundServiceModel.FK__WebServic__Provi__04E4BC85" FromRole="WebServiceUser" ToRole="RefundProvider" />
+        </EntityType>
+        <EntityType Name="WebServiceUsersPermission">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="PermissionId" />
+          </Key>
+          <Property Name="UserId" Type="Int64" Nullable="false" />
+          <Property Name="PermissionId" Type="Int64" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CardTransfer_RefundRequest">
+          <End Role="RefundRequest" Type="Self.RefundRequest" Multiplicity="0..1" />
+          <End Role="CardTransfer" Type="Self.CardTransfer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RefundRequest">
+              <PropertyRef Name="RefrenceNumber" />
+            </Principal>
+            <Dependent Role="CardTransfer">
+              <PropertyRef Name="RefundRefrenceNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PNA_RefundServiceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CardToCard" EntityType="Self.CardToCard" />
+          <EntitySet Name="CardTransfer" EntityType="Self.CardTransfer" />
+          <EntitySet Name="DailyTransactionAmount" EntityType="Self.DailyTransactionAmount" />
+          <EntitySet Name="Log" EntityType="Self.Log" />
+          <EntitySet Name="NationalCodeInquiry" EntityType="Self.NationalCodeInquiry" />
+          <EntitySet Name="RefundRequest" EntityType="Self.RefundRequest" />
+          <EntitySet Name="RefundRequestReconciliation" EntityType="Self.RefundRequestReconciliation" />
+          <EntitySet Name="ServerInfo" EntityType="Self.ServerInfo" />
+          <EntitySet Name="Token" EntityType="Self.Token" />
+          <EntitySet Name="WebServicePermission" EntityType="Self.WebServicePermission" />
+          <EntitySet Name="WebServiceUser" EntityType="Self.WebServiceUser" />
+          <EntitySet Name="WebServiceUsersPermission" EntityType="Self.WebServiceUsersPermission" />
+          <AssociationSet Name="FK_CardTransfer_RefundRequest" Association="Self.FK_CardTransfer_RefundRequest">
+            <End Role="RefundRequest" EntitySet="RefundRequest" />
+            <End Role="CardTransfer" EntitySet="CardTransfer" />
+          </AssociationSet>
+          <FunctionImport Name="SP_RefundStatistics" ReturnType="Collection(PNA_RefundServiceModel.SP_RefundStatistics_Result)" />
+          <EntitySet Name="RefundProvider" EntityType="PNA_RefundServiceModel.RefundProvider" />
+          <AssociationSet Name="FK__WebServic__Provi__04E4BC85" Association="PNA_RefundServiceModel.FK__WebServic__Provi__04E4BC85">
+            <End Role="RefundProvider" EntitySet="RefundProvider" />
+            <End Role="WebServiceUser" EntitySet="WebServiceUser" />
+          </AssociationSet>
+          <EntitySet Name="CardsInfo" EntityType="PNA_RefundServiceModel.CardsInfo" />
+          <EntitySet Name="IBANTransfer" EntityType="PNA_RefundServiceModel.IBANTransfer" />
+          <EntitySet Name="ProviderTransferDetailes" EntityType="PNA_RefundServiceModel.ProviderTransferDetailes" />
+        </EntityContainer>
+        <ComplexType Name="SP_RefundStatistics_Result">
+          <Property Type="Int64" Name="RefundCount" Nullable="false" />
+          <Property Type="DateTime" Name="date" Nullable="true" />
+          <Property Type="Int64" Name="Amount" Nullable="false" />
+          <Property Type="String" Name="RefundStatus" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="ExpiredCardTransferRecords" Nullable="false" />
+          <Property Type="Int64" Name="RemainCardTransferRecords" Nullable="false" />
+          <Property Type="Int64" Name="RemainRefundRecords" Nullable="false" />
+          <Property Type="Int64" Name="ErrorCardTransferRecords" Nullable="false" />
+          <Property Type="Int64" Name="UsedCards" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="RefundProvider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="WebServiceUser" Relationship="PNA_RefundServiceModel.FK__WebServic__Provi__04E4BC85" FromRole="RefundProvider" ToRole="WebServiceUser" />
+        </EntityType>
+        <Association Name="FK__WebServic__Provi__04E4BC85">
+          <End Type="PNA_RefundServiceModel.RefundProvider" Role="RefundProvider" Multiplicity="0..1" />
+          <End Type="PNA_RefundServiceModel.WebServiceUser" Role="WebServiceUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RefundProvider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WebServiceUser">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CardsInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EncryptedData" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Balance" Type="Int64" />
+          <Property Name="IsUsing" Type="Boolean" />
+          <Property Name="UserId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="IBANTransfer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RefundRefrenceNumber" Type="Int64" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TransferId" Type="Int64" />
+          <Property Name="Amount" Type="Int64" />
+          <Property Name="EncryptedIBAN" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EncryptedPan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InsertDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TransactionDateTime" Type="DateTime" Precision="3" />
+          <Property Name="RetryCount" Type="Int32" />
+          <Property Name="InquiryCommision" Type="Int64" />
+        </EntityType>
+        <EntityType Name="ProviderTransferDetailes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransferId" Type="Int64" />
+          <Property Name="ResponseStatus" Type="Boolean" />
+          <Property Name="Message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TransferAmount" Type="Int64" />
+          <Property Name="TransferCount" Type="Int32" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RefrenceNumber" Type="Int64" Nullable="false" />
+          <Property Name="CardStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CardOwner" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PNA_RefundServiceModelStoreContainer" CdmEntityContainer="PNA_RefundServiceEntities">
+          <EntitySetMapping Name="CardToCard">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.CardToCard">
+              <MappingFragment StoreEntitySet="CardToCard">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SourcePan" ColumnName="SourcePan" />
+                <ScalarProperty Name="DestinationPan" ColumnName="DestinationPan" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Rrn" ColumnName="Rrn" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InsertDateTime" ColumnName="InsertDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardTransfer">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.CardTransfer">
+              <MappingFragment StoreEntitySet="CardTransfer">
+                <ScalarProperty Name="SourceCardId" ColumnName="SourceCardId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RefundRefrenceNumber" ColumnName="RefundRefrenceNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Rrn" ColumnName="Rrn" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="EncryptedSourcePan" ColumnName="EncryptedSourcePan" />
+                <ScalarProperty Name="InsertDateTime" ColumnName="InsertDateTime" />
+                <ScalarProperty Name="TransactionDateTime" ColumnName="TransactionDateTime" />
+                <ScalarProperty Name="RetryCount" ColumnName="RetryCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyTransactionAmount">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.DailyTransactionAmount">
+              <MappingFragment StoreEntitySet="DailyTransactionAmount">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="TodayAmountSum" ColumnName="TodayAmountSum" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FunctionName" ColumnName="FunctionName" />
+                <ScalarProperty Name="RefrenceNumber" ColumnName="RefrenceNumber" />
+                <ScalarProperty Name="Rrn" ColumnName="Rrn" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="MaskedDestinationPan" ColumnName="MaskedDestinationPan" />
+                <ScalarProperty Name="RefundDescription" ColumnName="RefundDescription" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="InsertDateTime" ColumnName="InsertDateTime" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NationalCodeInquiry">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.NationalCodeInquiry">
+              <MappingFragment StoreEntitySet="NationalCodeInquiry">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="NationalCode" ColumnName="NationalCode" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="ShenasnameSerial" ColumnName="ShenasnameSerial" />
+                <ScalarProperty Name="ShenasnameNo" ColumnName="ShenasnameNo" />
+                <ScalarProperty Name="ShenasnameSeri" ColumnName="ShenasnameSeri" />
+                <ScalarProperty Name="DeathStatus" ColumnName="DeathStatus" />
+                <ScalarProperty Name="GenderStatus" ColumnName="GenderStatus" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RefundRequest">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.RefundRequest">
+              <MappingFragment StoreEntitySet="RefundRequest">
+                <ScalarProperty Name="IBANTransferInserted" ColumnName="IBANTransferInserted" />
+                <ScalarProperty Name="IsProvider" ColumnName="IsProvider" />
+                <ScalarProperty Name="SubRefundStatus" ColumnName="SubRefundStatus" />
+                <ScalarProperty Name="RRN" ColumnName="RRN" />
+                <ScalarProperty Name="RetryCount" ColumnName="RetryCount" />
+                <ScalarProperty Name="RefrenceNumber" ColumnName="RefrenceNumber" />
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EncryptedPan" ColumnName="EncryptedPan" />
+                <ScalarProperty Name="TransactionAmount" ColumnName="TransactionAmount" />
+                <ScalarProperty Name="CommitionAmount" ColumnName="CommitionAmount" />
+                <ScalarProperty Name="RefundStatus" ColumnName="RefundStatus" />
+                <ScalarProperty Name="TransferRrn" ColumnName="TransferRrn" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RefundDescription" ColumnName="RefundDescription" />
+                <ScalarProperty Name="InsertDateTime" ColumnName="InsertDateTime" />
+                <ScalarProperty Name="TransferDateTime" ColumnName="TransferDateTime" />
+                <ScalarProperty Name="CardTransferInserted" ColumnName="CardTransferInserted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RefundRequestReconciliation">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.RefundRequestReconciliation">
+              <MappingFragment StoreEntitySet="RefundRequestReconciliation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RefrenceNumber" ColumnName="RefrenceNumber" />
+                <ScalarProperty Name="EncryptedPan" ColumnName="EncryptedPan" />
+                <ScalarProperty Name="CardTransferEncryptedSourcePan" ColumnName="CardTransferEncryptedSourcePan" />
+                <ScalarProperty Name="ReverseAmount" ColumnName="ReverseAmount" />
+                <ScalarProperty Name="InsertDateTime" ColumnName="InsertDateTime" />
+                <ScalarProperty Name="ReverseRrn" ColumnName="ReverseRrn" />
+                <ScalarProperty Name="ReverseDateTime" ColumnName="ReverseDateTime" />
+                <ScalarProperty Name="ReverseStatus" ColumnName="ReverseStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServerInfo">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.ServerInfo">
+              <MappingFragment StoreEntitySet="ServerInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+                <ScalarProperty Name="PublicKey" ColumnName="PublicKey" />
+                <ScalarProperty Name="PrivateKey" ColumnName="PrivateKey" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Token">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.Token">
+              <MappingFragment StoreEntitySet="Token">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TokenIssueDate" ColumnName="TokenIssueDate" />
+                <ScalarProperty Name="Token1" ColumnName="Token" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="TokenVerifiedDate" ColumnName="TokenVerifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebServicePermission">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.WebServicePermission">
+              <MappingFragment StoreEntitySet="WebServicePermission">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Permission" ColumnName="Permission" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebServiceUser">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.WebServiceUser">
+              <MappingFragment StoreEntitySet="WebServiceUser">
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PublicKey" ColumnName="PublicKey" />
+                <ScalarProperty Name="YaghutUser" ColumnName="YaghutUser" />
+                <ScalarProperty Name="YaghutPassword" ColumnName="YaghutPassword" />
+                <ScalarProperty Name="CustomerAccount" ColumnName="CustomerAccount" />
+                <ScalarProperty Name="BankAccount" ColumnName="BankAccount" />
+                <ScalarProperty Name="ReverseCardNumber" ColumnName="ReverseCardNumber" />
+                <ScalarProperty Name="TransactionMaximumAmount" ColumnName="TransactionMaximumAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebServiceUsersPermission">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.WebServiceUsersPermission">
+              <MappingFragment StoreEntitySet="WebServiceUsersPermission">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_RefundStatistics" FunctionName="PNA_RefundServiceModel.Store.SP_RefundStatistics">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PNA_RefundServiceModel.SP_RefundStatistics_Result">
+                <ScalarProperty Name="RefundCount" ColumnName="RefundCount" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RefundStatus" ColumnName="RefundStatus" />
+                <ScalarProperty Name="ExpiredCardTransferRecords" ColumnName="ExpiredCardTransferRecords" />
+                <ScalarProperty Name="RemainCardTransferRecords" ColumnName="RemainCardTransferRecords" />
+                <ScalarProperty Name="RemainRefundRecords" ColumnName="RemainRefundRecords" />
+                <ScalarProperty Name="ErrorCardTransferRecords" ColumnName="ErrorCardTransferRecords" />
+                <ScalarProperty Name="UsedCards" ColumnName="UsedCards" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="RefundProvider">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.RefundProvider">
+              <MappingFragment StoreEntitySet="RefundProvider">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CardsInfo">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.CardsInfo">
+              <MappingFragment StoreEntitySet="CardsInfo">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="IsUsing" ColumnName="IsUsing" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="EncryptedData" ColumnName="EncryptedData" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IBANTransfer">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.IBANTransfer">
+              <MappingFragment StoreEntitySet="IBANTransfer">
+                <ScalarProperty Name="InquiryCommision" ColumnName="InquiryCommision" />
+                <ScalarProperty Name="RetryCount" ColumnName="RetryCount" />
+                <ScalarProperty Name="TransactionDateTime" ColumnName="TransactionDateTime" />
+                <ScalarProperty Name="InsertDateTime" ColumnName="InsertDateTime" />
+                <ScalarProperty Name="EncryptedPan" ColumnName="EncryptedPan" />
+                <ScalarProperty Name="EncryptedIBAN" ColumnName="EncryptedIBAN" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RefundRefrenceNumber" ColumnName="RefundRefrenceNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProviderTransferDetailes">
+            <EntityTypeMapping TypeName="PNA_RefundServiceModel.ProviderTransferDetailes">
+              <MappingFragment StoreEntitySet="ProviderTransferDetailes">
+                <ScalarProperty Name="CardOwner" ColumnName="CardOwner" />
+                <ScalarProperty Name="CardStatus" ColumnName="CardStatus" />
+                <ScalarProperty Name="RefrenceNumber" ColumnName="RefrenceNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TransferCount" ColumnName="TransferCount" />
+                <ScalarProperty Name="TransferAmount" ColumnName="TransferAmount" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ResponseStatus" ColumnName="ResponseStatus" />
+                <ScalarProperty Name="TransferId" ColumnName="TransferId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
